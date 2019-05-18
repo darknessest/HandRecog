@@ -8,7 +8,7 @@ from skimage import io
 
 
 def convert_img(img_file, path_to_img='./data/'):
-    if img_file.endswith('.jpg') or img_file.endswith('.png'):
+    if img_file.endswith('.jpg') or img_file.endswith('.png') or img_file.endswith('.bmp'):
         print(img_file + ' is being processed')
         image = Image.open(os.path.join(path_to_img, img_file))
         if image.width != 32 or image.height != 32:
@@ -27,6 +27,9 @@ def convert_img(img_file, path_to_img='./data/'):
         if image_path.endswith('.png'):
             image_path = image_path.strip('.png')
             image.save('.' + image_path + '_conv.png')
+        if image_path.endswith('.bmp'):
+            image_path = image_path.strip('.bmp')
+            image.save('.' + image_path + '_conv.png')
 
 
 print('\nLoading Data For Prediction...')
@@ -41,7 +44,6 @@ for file in sorted(os.listdir(path)):
         if not file.endswith('_conv.png'):
             convert_img(file)
 
-
 for file in sorted(os.listdir(path)):
     if not file.startswith("."):
         if file.endswith('_conv.png'):
@@ -53,7 +55,6 @@ for file in sorted(os.listdir(path)):
             i += 1
             pic_names.append(file)
 
-
 input_img = np.array(all_images)
 input_labels = np_utils.to_categorical(all_labels, i)
 print("image shape: ")
@@ -64,13 +65,13 @@ print(input_labels.shape)
 
 print('\nLoading the Model...')
 model_labels = []
-with open("labels_crohme.txt") as file:  # change labels file name
+with open("labels_big.txt") as file:  # change labels file name
     for line in file:
         line = line.strip().split()[0]
         model_labels.append(line)
 
 clf = CNN.build(width=32, height=32, depth=1, total_classes=len(model_labels), input_shape=(32, 32, 1),
-                Saved_Weights_Path='cnn_weights_crohme.hdf5')  # change model file name
+                Saved_Weights_Path='cnn_weights_big.hdf5')  # change model file name
 
 text_file = open("predictions.txt", "w")
 print("Writing predictions to predictions.txt ...")
