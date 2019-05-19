@@ -65,13 +65,13 @@ print(input_labels.shape)
 
 print('\nLoading the Model...')
 model_labels = []
-with open("labels_big.txt") as file:  # change labels file name
+with open("labels_big_new.txt") as file:  # change labels file name
     for line in file:
         line = line.strip().split()[0]
         model_labels.append(line)
 
 clf = CNN.build(width=32, height=32, depth=1, total_classes=len(model_labels), input_shape=(32, 32, 1),
-                Saved_Weights_Path='cnn_weights_big.hdf5')  # change model file name
+                Saved_Weights_Path='cnn_weights_big_new.hdf5')  # change model file name
 
 text_file = open("predictions.txt", "w")
 print("Writing predictions to predictions.txt ...")

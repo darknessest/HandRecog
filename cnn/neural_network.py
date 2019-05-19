@@ -30,8 +30,10 @@ class CNN:
         # FC => RELU layers
         #  Fully Connected Layer -> ReLU Activation Function
         model.add(Flatten())
-        model.add(Dense(500))
+        model.add(Dense(512))
         model.add(Activation("relu"))
+        #new
+        model.add(Dropout(0.5))
 
         # Using Softmax Classifier for Linear Classification
         model.add(Dense(total_classes))
