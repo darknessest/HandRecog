@@ -7,3 +7,4 @@ Outcome of predictions will be writtent to predictions.txt
 ### Check whether all requirements are installed
 
 #### all trained models are in folder "trained models"
+yuxi_update1 and yuxi_update3 are the best models so far
